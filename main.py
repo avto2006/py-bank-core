@@ -65,3 +65,23 @@ def updateBalance(account_number):
 updateBalance("GE01001")
         
         
+
+# გადარიცხვის მოდული
+
+def transferMoney(sender_account):
+    receiver_account = input("მიმღები პირის ანგარიშის ნომერი: ").upper().strip()
+
+    if receiver_account in bank_db:
+         amount = float(input("ჩაწერეთ თანხა: "))
+         if bank_db[sender_account]["balance"] >= amount:
+             bank_db[sender_account]["balance"] -= amount
+             bank_db[sender_account]["history"].append(-amount)
+
+             bank_db[receiver_account]["balance"] += amount
+             bank_db[receiver_account]["history"].append(amount)
+
+             print("გადარიცხვა წარმატებით დასრულდა!")
+         else:
+             print("არასაკმარისი ბალანსი!")  
+    else:
+         print("მიმღები ანგარიში ვერ მოიძებნა!")
