@@ -85,3 +85,32 @@ def transferMoney(sender_account):
              print("არასაკმარისი ბალანსი!")  
     else:
          print("მიმღები ანგარიში ვერ მოიძებნა!")
+
+
+
+print("--- კეთილი იყოს თქვენი მობრძანება PY-BANK-ში ---")
+active_user = input("სისტემაში შესასვლელად შეიყვანეთ თქვენი ანგარიშის ნომერი: ").strip().upper()
+
+if active_user in bank_db:
+    print(f"\n👋 მოგესალმებით, {bank_db[active_user]['name']}!")
+    print(f"თქვენი მიმდინარე ბალანსია: {bank_db[active_user]['balance']} ლარი.")
+    
+    while True:
+        print("\n--- მენიუ ---")
+        print("1. ანგარიშის მართვა (შეტანა/გატანა)")
+        print("2. თანხის გადარიცხვა")
+        print("3. გასვლა")
+        
+        choice = input("აირჩიეთ მოქმედება (1-3): ").strip()
+        
+        if choice == "1":
+            updateBalance(active_user)
+        elif choice == "2":
+            transferMoney(active_user)
+        elif choice == "3":
+            print("\n👋 გმადლობთ, რომ სარგებლობთ ჩვენი ბანკით! ნახვამდის.")
+            break
+        else:
+            print("❌ არასწორი არჩევანი, სცადეთ თავიდან.")
+else:
+    print("❌ ავტორიზაცია უარყოფილია: ანგარიში ვერ მოიძებნა!")        
